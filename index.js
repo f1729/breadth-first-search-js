@@ -123,12 +123,13 @@ var end = graph.setEnd('Kevin Bacon');
 
 var queue = [];
 
+var rut = [];
 start.searched = true;
 queue.push(start);
 
 while (queue.length > 0) {
   var current = queue.shift();
-  console.log(current)
+  rut.push(current);
   if (current == end) {
     console.log("Found " + current.value);
     break;
@@ -138,8 +139,10 @@ while (queue.length > 0) {
     var neighbor = edges[i];
     if (!neighbor.searched) {
       neighbor.searched = true;
-      neighbor.parent = current;
+      neighbor.parent = current;  
       queue.push(neighbor);
     }
   }
 }
+
+console.log(end.parent.parent.parent.parent.parent.parent)
