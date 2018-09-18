@@ -7,4 +7,5 @@ function Node (value) {
 
 Node.prototype.addEdge = function (child) {
     this.edges.push(child);
+    child.edges.push(this);
 }

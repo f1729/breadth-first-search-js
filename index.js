@@ -105,15 +105,40 @@ for (var i=0; i<data.movies.length; i++) {
     graph.addNode(movieNode);
     for (var j = 0; j < data.movies[i].cast.length; j++) {
         // console.log(data.movies[i].cast[j]);
-        var actorNode = new Node(data.movies[i].cast[j]);
-        // console.log(graph.getNode(actorNode))
+        var actorNode = graph.getNode(data.movies[i].cast[j]); 
         if (graph.getNode(actorNode) == null) {
-            graph.addNode(actorNode);
+            actorNode = new Node(data.movies[i].cast[j]);
         }
-        
+        graph.addNode(actorNode);
         movieNode.addEdge(actorNode);
     }
 
 }
 
-console.log(graph);
+console.log('GRAPH: ', graph);
+var nodeStart = graph.setStart('Rachel McAdams');
+// var nodeStart = graph.setStart('Kevin Bacon');
+var nodeEnd = graph.setEnd('Kevin Bacon');
+
+var queue = [];
+
+nodeStart.searched = true;
+queue.push(nodeStart);
+
+while (queue.length > 0) {
+    var current = queue.shift();
+    // console.log(current.value);
+    if (current == nodeEnd) {
+        console.log('Found ' + current.value);
+        break
+    }
+    for (var i = 0; i < current.edges.length; i++) {
+        // console.log(current.edges);
+        if (!current.edges[i].searched) {
+            current.edges[i].parent = current;
+            current.edges[i].searched = true;
+            queue.push(current.edges[i]);
+        }
+    }
+
+}
