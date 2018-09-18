@@ -12,9 +12,9 @@ Graph.prototype.addNode = function (node) {
 }
 
 
-Graph.prototype.getNode = function (name) {
-    if (this.graph[name]) return this.graph[name];
-    return null
+Graph.prototype.getNode = function(actor) {
+  var n = this.graph[actor];
+  return n;
 }
 
 Graph.prototype.setStart = function (name) {
